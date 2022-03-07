@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ExpenseForm.css";
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
   const [userInput, setUserInput] = useState({
     enteredTitle: "",
     enteredAmount: "",
@@ -28,12 +28,15 @@ const ExpenseForm = () => {
 
   const submitHandler = (event) => {
     event.preventDefault(); // prevent page reloading when submitting form
-    console.log({
+    const expenseData = {
       title: userInput.enteredTitle,
       amount: userInput.enteredAmount,
       date: new Date(userInput.enteredDate),
-    });
+    };
+
+    props.onSaveExpenseData(expenseData);
     setUserInput({
+      // clear user input after submission
       enteredTitle: "",
       enteredAmount: "",
       enteredDate: "",
@@ -47,7 +50,7 @@ const ExpenseForm = () => {
           <label>Title</label>
           <input
             type="text"
-            value="{enteredTitle}"
+            value={userInput.enteredTitle}
             onChange={titleChangeHandler}
           />
         </div>
@@ -57,7 +60,7 @@ const ExpenseForm = () => {
             type="number"
             min="0.01"
             step="0.01"
-            value="{enteredAmount}"
+            value={userInput.enteredAmount}
             onChange={amountChangeHandler}
           />
         </div>
@@ -67,7 +70,7 @@ const ExpenseForm = () => {
             type="date"
             min="2019-01-01"
             max="2022-12-31"
-            value="{enteredDate}"
+            value={userInput.enteredDate}
             onChange={dateChangeHandler}
           />
         </div>
