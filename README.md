@@ -1,6 +1,6 @@
 # Expense Tracker
 
-Expense tracker created using React.js.
+Expense tracker with a dynamic chart created with React.
 
 ## Features
 - Add new expenses
